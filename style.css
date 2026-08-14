@@ -115,22 +115,73 @@ html, body {
   opacity: 1;
 }
 
-/* Translucent Boxed Right Menu Button matching Screenshot 2 */
+/* Translucent Boxed Right Menu Button with Edit/Save State */
 .right-menu-box-btn {
   background: rgba(16, 50, 95, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 4px;
-  padding: 5px 8px;
+  padding: 5px 10px;
   color: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  gap: 4px;
+  transition: all 0.25s ease;
+  user-select: none;
 }
 
 .right-menu-box-btn:hover {
-  background: rgba(16, 50, 95, 0.65);
+  background: rgba(16, 50, 95, 0.75);
+  border-color: #ffffff;
+}
+
+.right-menu-box-btn.editing-active {
+  background: #28a745 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.6);
+  padding: 5px 12px;
+}
+
+.edit-btn-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+/* Floating Status Toast for Edit/Save Mode */
+.edit-mode-toast {
+  position: fixed;
+  top: 66px;
+  right: 16px;
+  background: #323232;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1050;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.edit-mode-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.edit-mode-toast.active-edit {
+  background: #007bff;
+  border-left: 4px solid #ffffff;
+}
+
+.edit-mode-toast.saved-lock {
+  background: #28a745;
+  border-left: 4px solid #ffffff;
 }
 
 .user-profile-nav {
@@ -357,26 +408,37 @@ html, body {
   word-break: break-word;
 }
 
-/* 5. Editable & Static Fields Styling */
+/* 5. Editable & Locked Fields Styling */
 .editable-field {
   display: inline-block;
   min-width: 20px;
   border-radius: 2px;
   padding: 1px 3px;
-  transition: background-color 0.2s, outline 0.2s;
+  transition: outline 0.2s;
 }
 
-.editable-field:hover {
+/* When Edit Mode is ACTIVE */
+body.is-edit-mode .editable-field {
+  cursor: text !important;
   outline: 1px dashed #258fdb;
-  background-color: rgba(37, 143, 223, 0.08);
-  cursor: text;
 }
 
-.editable-field:focus {
+body.is-edit-mode .editable-field:hover {
+  outline: 1.5px dashed #1d4981;
+}
+
+body.is-edit-mode .editable-field:focus {
   outline: 2px solid #258fdb !important;
   background-color: #ffffff !important;
   color: #111111 !important;
   box-shadow: 0 0 6px rgba(37, 143, 223, 0.4);
+}
+
+/* When Locked (is-edit-mode disabled) */
+body:not(.is-edit-mode) .editable-field {
+  cursor: default !important;
+  outline: none !important;
+  user-select: text;
 }
 
 .static-field,
@@ -400,7 +462,7 @@ html, body {
 .accordion-container {
   display: flex;
   flex-direction: column;
-  gap: 48px; /* Tripled vertical spacing between accordion sections as requested */
+  gap: 48px;
   margin-top: 18px;
 }
 
@@ -478,7 +540,7 @@ html, body {
   display: block;
 }
 
-/* 7. SLIDING TABLE CONTAINER WITH EXACT EQUAL LENGTH ACROSS ALL ROWS */
+/* 7. SLIDING TABLE CONTAINER WITH SIGNATURE CREAM/YELLOW CELL BACKGROUND (#fff4df) */
 .table-sliding-container {
   width: 100%;
   overflow-x: auto;
@@ -524,7 +586,7 @@ html, body {
   display: table-cell;
   width: 30%;
   min-width: 170px;
-  background-color: #d1d1d1;
+  background-color: #d1d1d1 !important;
   color: #303030;
   font-weight: 700;
   border: 1px solid #c4c4c4;
@@ -533,12 +595,13 @@ html, body {
   padding: 10px 16px;
 }
 
+/* Right-side value cells maintain signature cream/yellow background (#fff4df) AT ALL TIMES */
 .sliding-table tr .col-value,
 .sliding-table tr td:last-child {
   display: table-cell;
   width: 70%;
   min-width: 450px;
-  background-color: #fff4df;
+  background-color: #fff4df !important; /* Permanent cream yellow background */
   color: #303030;
   font-weight: 500;
   border: 1px solid #ebd9c3;
@@ -588,7 +651,7 @@ html, body {
   }
 
   .accordion-container {
-    gap: 45px; /* Tripled vertical spacing on mobile */
+    gap: 45px;
   }
 
   .accordion-header {

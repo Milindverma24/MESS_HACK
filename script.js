@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // New random demo student data
+  // Default demo student data
   const defaultStudentData = {
     regNo: '23BCE10482',
     name: 'ADITYA SHARMA',
@@ -23,16 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     motherName: 'ANITA SHARMA',
     proctorName: 'DR. ANIL KUMAR',
     proctorDept: 'SCOPE',
-    photoUrl: '' // Empty so CHOOSE PHOTO option displays by default
+    photoUrl: ''
   };
 
-  // Force reset saved state to ensure personal credentials are clean
   let studentData = { ...defaultStudentData };
   try {
     const saved = localStorage.getItem('vtop_student_data');
     if (saved) {
       const parsed = JSON.parse(saved);
-      // If saved data contained old credentials, override with new demo data
       if (parsed.name === 'MILIND VERMA' || parsed.regNo === '23BCE11695') {
         localStorage.removeItem('vtop_student_data');
         studentData = { ...defaultStudentData };
@@ -55,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render state to DOM elements
   function renderAllFields() {
-    // Render text fields bound via data-bind
     document.querySelectorAll('[data-bind]').forEach(el => {
       const key = el.getAttribute('data-bind');
       if (key && studentData[key] !== undefined) {
@@ -65,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Render photo vs CHOOSE PHOTO placeholder
     const mainImg = document.getElementById('main-student-img');
     const navImg = document.getElementById('nav-student-img');
     const mainPlaceholder = document.getElementById('photo-placeholder');
@@ -99,8 +95,82 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial render
   renderAllFields();
 
-  // 1. Reactive Sync Engine: Listen for live changes on any data-bind element across any profile section
+  // ==========================================
+  // EDIT MODE & SAVE LOCK SYSTEM
+  // ==========================================
+  let isEditMode = false;
+
+  const toggleEditBtn = document.getElementById('toggle-edit-btn');
+  const editBtnIcon = document.getElementById('edit-btn-icon');
+  const editBtnLabel = document.getElementById('edit-btn-label');
+  const editToast = document.getElementById('edit-toast');
+  const toastText = document.getElementById('toast-text');
+
+  function showToast(msg, type = 'active') {
+    if (!editToast || !toastText) return;
+    toastText.textContent = msg;
+    editToast.className = 'edit-mode-toast show ' + (type === 'saved' ? 'saved-lock' : 'active-edit');
+    
+    clearTimeout(editToast._timer);
+    editToast._timer = setTimeout(() => {
+      editToast.classList.remove('show');
+    }, 3500);
+  }
+
+  function setEditModeState(active) {
+    isEditMode = active;
+
+    if (isEditMode) {
+      document.body.classList.add('is-edit-mode');
+      document.querySelectorAll('.editable-field').forEach(el => {
+        el.setAttribute('contenteditable', 'true');
+      });
+
+      if (toggleEditBtn) toggleEditBtn.classList.add('editing-active');
+      if (editBtnIcon) editBtnIcon.style.display = 'none';
+      if (editBtnLabel) editBtnLabel.style.display = 'inline';
+      if (toggleEditBtn) toggleEditBtn.title = 'Click to Save Changes & Lock Profile';
+
+      showToast('✏️ Edit Mode Active! Click [SAVE] when finished.', 'active');
+    } else {
+      // Collect latest data before locking
+      document.querySelectorAll('[data-bind]').forEach(el => {
+        const key = el.getAttribute('data-bind');
+        if (key) {
+          studentData[key] = el.textContent.trim();
+        }
+      });
+      saveData();
+      renderAllFields();
+
+      document.body.classList.remove('is-edit-mode');
+      document.querySelectorAll('.editable-field').forEach(el => {
+        el.setAttribute('contenteditable', 'false');
+        el.blur();
+      });
+
+      if (toggleEditBtn) toggleEditBtn.classList.remove('editing-active');
+      if (editBtnIcon) editBtnIcon.style.display = 'inline-block';
+      if (editBtnLabel) editBtnLabel.style.display = 'none';
+      if (toggleEditBtn) toggleEditBtn.title = 'Click to Enable Edit Mode';
+
+      showToast('✓ All changes saved successfully! Profile locked.', 'saved');
+    }
+  }
+
+  // Ensure default state is LOCKED on load
+  setEditModeState(false);
+
+  // Toggle button click listener
+  if (toggleEditBtn) {
+    toggleEditBtn.addEventListener('click', () => {
+      setEditModeState(!isEditMode);
+    });
+  }
+
+  // 1. Reactive Sync Engine: Listen for live changes on any data-bind element while in Edit Mode
   document.addEventListener('input', (e) => {
+    if (!isEditMode) return;
     const target = e.target;
     if (target && target.hasAttribute('data-bind')) {
       const key = target.getAttribute('data-bind');

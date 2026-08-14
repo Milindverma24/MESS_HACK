@@ -28,7 +28,7 @@
         Session Time : <span id="timer-display">19m 49s</span>
       </div>
 
-      <!-- Right Action Icons (Home, Print, Boxed Hamburger Menu) -->
+      <!-- Right Action Icons (Home, Print, Boxed Hamburger/Edit-Save Menu) -->
       <div class="nav-icons-group">
         <a href="#" class="nav-icon" title="Home">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -43,10 +43,12 @@
             <rect x="6" y="14" width="12" height="8"></rect>
           </svg>
         </a>
-        <button class="right-menu-box-btn" aria-label="Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <!-- EDIT / SAVE TOGGLE BUTTON -->
+        <button class="right-menu-box-btn" id="toggle-edit-btn" aria-label="Toggle Edit Mode" title="Click to Edit Profile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="edit-btn-icon">
             <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
           </svg>
+          <span class="edit-btn-label" id="edit-btn-label" style="display: none;">SAVE</span>
         </button>
       </div>
 
@@ -59,7 +61,7 @@
         </div>
         <img src="" alt="Student Thumbnail" class="nav-photo" id="nav-student-img" style="display: none;">
         <span class="user-id">
-          <span class="editable-field" data-bind="regNo" contenteditable="true" title="Click to edit Register Number">23BCE10482</span> (STUDENT)
+          <span class="editable-field" data-bind="regNo" contenteditable="false" title="Register Number">23BCE10482</span> (STUDENT)
         </span>
         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
           <path d="M7 10l5 5 5-5z"/>
@@ -67,6 +69,11 @@
       </div>
     </div>
   </header>
+
+  <!-- Edit Mode Floating Status Toast Notification -->
+  <div class="edit-mode-toast" id="edit-toast">
+    <span id="toast-text">Click the top-right menu button to Enable Edit Mode</span>
+  </div>
 
   <!-- Left Sidebar (Desktop Only) -->
   <aside class="sidebar desktop-only">
@@ -129,29 +136,29 @@
             <div class="photo-overlay">CHOOSE PHOTO</div>
           </div>
           <input type="file" id="photo-upload" accept="image/*" style="display: none;">
-          <div class="student-name editable-field" data-bind="name" contenteditable="true" title="Click to edit Name">ADITYA SHARMA</div>
+          <div class="student-name editable-field" data-bind="name" contenteditable="false" title="Student Name">ADITYA SHARMA</div>
         </div>
 
         <!-- Col 2: Info Fields -->
         <div class="profile-col info-col">
           <div class="info-group inline-group">
             <span class="label">REGISTER NUMBER:</span>
-            <span class="value editable-field" data-bind="regNo" contenteditable="true" title="Click to edit Register Number">23BCE10482</span>
+            <span class="value editable-field" data-bind="regNo" contenteditable="false" title="Register Number">23BCE10482</span>
           </div>
 
           <div class="info-group block-group">
             <span class="label block-label">VIT EMAIL:</span>
-            <div class="value editable-field block-value" data-bind="email" contenteditable="true" title="Click to edit Email">aditya.23bce10482@gmail.com</div>
+            <div class="value editable-field block-value" data-bind="email" contenteditable="false" title="Email">aditya.23bce10482@gmail.com</div>
           </div>
 
           <div class="info-group block-group">
             <span class="label block-label">PROGRAM &amp; BRANCH:</span>
-            <div class="value editable-field block-value" data-bind="program" contenteditable="true" title="Click to edit Program">BTECH - Computer Science and Engineering</div>
+            <div class="value editable-field block-value" data-bind="program" contenteditable="false" title="Program">BTECH - Computer Science and Engineering</div>
           </div>
 
           <div class="info-group block-group">
             <span class="label block-label">SCHOOL NAME:</span>
-            <div class="value editable-field block-value" data-bind="school" contenteditable="true" title="Click to edit School">School of Computer Science and Engineering (SCOPE)</div>
+            <div class="value editable-field block-value" data-bind="school" contenteditable="false" title="School">School of Computer Science and Engineering (SCOPE)</div>
           </div>
         </div>
       </div>
@@ -185,31 +192,31 @@
                 <tbody>
                   <tr>
                     <td class="col-label">Student Full Name</td>
-                    <td class="col-value editable-field" data-bind="name" contenteditable="true">ADITYA SHARMA</td>
+                    <td class="col-value editable-field" data-bind="name" contenteditable="false">ADITYA SHARMA</td>
                   </tr>
                   <tr>
                     <td class="col-label">Application Number</td>
-                    <td class="col-value editable-field" data-bind="applicationNo" contenteditable="true">2023881024</td>
+                    <td class="col-value editable-field" data-bind="applicationNo" contenteditable="false">2023881024</td>
                   </tr>
                   <tr>
                     <td class="col-label">Register Number</td>
-                    <td class="col-value editable-field" data-bind="regNo" contenteditable="true">23BCE10482</td>
+                    <td class="col-value editable-field" data-bind="regNo" contenteditable="false">23BCE10482</td>
                   </tr>
                   <tr>
                     <td class="col-label">Gender</td>
-                    <td class="col-value editable-field" data-bind="gender" contenteditable="true">MALE</td>
+                    <td class="col-value editable-field" data-bind="gender" contenteditable="false">MALE</td>
                   </tr>
                   <tr>
                     <td class="col-label">Date of Birth</td>
-                    <td class="col-value editable-field" data-bind="dob" contenteditable="true">15-AUG-2005</td>
+                    <td class="col-value editable-field" data-bind="dob" contenteditable="false">15-AUG-2005</td>
                   </tr>
                   <tr>
                     <td class="col-label">Blood Group</td>
-                    <td class="col-value editable-field" data-bind="bloodGroup" contenteditable="true">O+</td>
+                    <td class="col-value editable-field" data-bind="bloodGroup" contenteditable="false">O+</td>
                   </tr>
                   <tr>
                     <td class="col-label">Nationality</td>
-                    <td class="col-value editable-field" data-bind="nationality" contenteditable="true">INDIAN</td>
+                    <td class="col-value editable-field" data-bind="nationality" contenteditable="false">INDIAN</td>
                   </tr>
                 </tbody>
               </table>
@@ -243,23 +250,23 @@
                 <tbody>
                   <tr>
                     <td class="col-label">Program &amp; Branch</td>
-                    <td class="col-value editable-field" data-bind="program" contenteditable="true">BTECH - Computer Science and Engineering</td>
+                    <td class="col-value editable-field" data-bind="program" contenteditable="false">BTECH - Computer Science and Engineering</td>
                   </tr>
                   <tr>
                     <td class="col-label">School Name</td>
-                    <td class="col-value editable-field" data-bind="school" contenteditable="true">School of Computer Science and Engineering (SCOPE)</td>
+                    <td class="col-value editable-field" data-bind="school" contenteditable="false">School of Computer Science and Engineering (SCOPE)</td>
                   </tr>
                   <tr>
                     <td class="col-label">10th Board</td>
-                    <td class="col-value editable-field" data-bind="board10" contenteditable="true">CBSE</td>
+                    <td class="col-value editable-field" data-bind="board10" contenteditable="false">CBSE</td>
                   </tr>
                   <tr>
                     <td class="col-label">12th Board</td>
-                    <td class="col-value editable-field" data-bind="board12" contenteditable="true">CBSE</td>
+                    <td class="col-value editable-field" data-bind="board12" contenteditable="false">CBSE</td>
                   </tr>
                   <tr>
                     <td class="col-label">Medium of Instruction</td>
-                    <td class="col-value editable-field" data-bind="medium" contenteditable="true">ENGLISH</td>
+                    <td class="col-value editable-field" data-bind="medium" contenteditable="false">ENGLISH</td>
                   </tr>
                 </tbody>
               </table>
@@ -293,11 +300,11 @@
                 <tbody>
                   <tr>
                     <td class="col-label">Father's Name</td>
-                    <td class="col-value editable-field" data-bind="fatherName" contenteditable="true">VIKRAM SHARMA</td>
+                    <td class="col-value editable-field" data-bind="fatherName" contenteditable="false">VIKRAM SHARMA</td>
                   </tr>
                   <tr>
                     <td class="col-label">Mother's Name</td>
-                    <td class="col-value editable-field" data-bind="motherName" contenteditable="true">ANITA SHARMA</td>
+                    <td class="col-value editable-field" data-bind="motherName" contenteditable="false">ANITA SHARMA</td>
                   </tr>
                 </tbody>
               </table>
@@ -331,11 +338,11 @@
                 <tbody>
                   <tr>
                     <td class="col-label">Proctor Name</td>
-                    <td class="col-value editable-field" data-bind="proctorName" contenteditable="true">DR. ANIL KUMAR</td>
+                    <td class="col-value editable-field" data-bind="proctorName" contenteditable="false">DR. ANIL KUMAR</td>
                   </tr>
                   <tr>
                     <td class="col-label">Department</td>
-                    <td class="col-value editable-field" data-bind="proctorDept" contenteditable="true">SCOPE</td>
+                    <td class="col-value editable-field" data-bind="proctorDept" contenteditable="false">SCOPE</td>
                   </tr>
                 </tbody>
               </table>
@@ -370,11 +377,11 @@
                 <tbody>
                   <tr>
                     <td class="col-label">Application Number</td>
-                    <td class="col-value editable-field" data-bind="applicationNo" contenteditable="true" title="Click to edit Application Number">2023881024</td>
+                    <td class="col-value editable-field" data-bind="applicationNo" contenteditable="false" title="Application Number">2023881024</td>
                   </tr>
                   <tr>
                     <td class="col-label">Register Number</td>
-                    <td class="col-value editable-field" data-bind="regNo" contenteditable="true" title="Click to edit Register Number">23BCE10482</td>
+                    <td class="col-value editable-field" data-bind="regNo" contenteditable="false" title="Register Number">23BCE10482</td>
                   </tr>
                   <tr>
                     <td class="col-label">Block Name</td>
@@ -382,15 +389,15 @@
                   </tr>
                   <tr>
                     <td class="col-label">Room No.</td>
-                    <td class="col-value editable-field" data-bind="roomNo" contenteditable="true" title="Click to edit Room Number">A007</td>
+                    <td class="col-value editable-field" data-bind="roomNo" contenteditable="false" title="Room Number">A007</td>
                   </tr>
                   <tr>
                     <td class="col-label">Bed Type</td>
-                    <td class="col-value editable-field" data-bind="bedType" contenteditable="true" title="Click to edit Bed Type">3- BED -NACPF</td>
+                    <td class="col-value editable-field" data-bind="bedType" contenteditable="false" title="Bed Type">3- BED -NACPF</td>
                   </tr>
                   <tr>
                     <td class="col-label">Mess Information</td>
-                    <td class="col-value editable-field" data-bind="messInfo" contenteditable="true" title="Click to edit Mess Information">NON VEG - M/S MAYURI CATERERS</td>
+                    <td class="col-value editable-field" data-bind="messInfo" contenteditable="false" title="Mess Information">NON VEG - M/S MAYURI CATERERS</td>
                   </tr>
                 </tbody>
               </table>
