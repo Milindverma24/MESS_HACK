@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Default initial data matching screenshots
+  // New random demo student data
   const defaultStudentData = {
-    regNo: '23BCE11695',
-    name: 'MILIND VERMA',
-    email: 'milind.23bce11695@vitbhopal.ac.in',
+    regNo: '23BCE10482',
+    name: 'ADITYA SHARMA',
+    email: 'aditya.23bce10482@gmail.com',
     program: 'BTECH - Computer Science and Engineering',
     school: 'School of Computer Science and Engineering (SCOPE)',
-    applicationNo: '2023998035',
+    applicationNo: '2023881024',
     blockName: 'MENS HOSTEL BLOCK-2 (BOYS HOSTEL - Block )',
     roomNo: 'A007',
     bedType: '3- BED -NACPF',
-    messInfo: 'JAIN - M/S JMB CATERERS',
+    messInfo: 'NON VEG - M/S MAYURI CATERERS',
     gender: 'MALE',
     dob: '15-AUG-2005',
     bloodGroup: 'O+',
@@ -19,19 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
     board10: 'CBSE',
     board12: 'CBSE',
     medium: 'ENGLISH',
-    fatherName: 'RAJESH VERMA',
-    motherName: 'SUNITA VERMA',
+    fatherName: 'VIKRAM SHARMA',
+    motherName: 'ANITA SHARMA',
     proctorName: 'DR. ANIL KUMAR',
     proctorDept: 'SCOPE',
-    photoUrl: 'student-photo.jpg'
+    photoUrl: '' // Empty so CHOOSE PHOTO option displays by default
   };
 
-  // Load saved data or fallback to defaults
+  // Force reset saved state to ensure personal credentials are clean
   let studentData = { ...defaultStudentData };
   try {
     const saved = localStorage.getItem('vtop_student_data');
     if (saved) {
-      studentData = { ...defaultStudentData, ...JSON.parse(saved) };
+      const parsed = JSON.parse(saved);
+      // If saved data contained old credentials, override with new demo data
+      if (parsed.name === 'MILIND VERMA' || parsed.regNo === '23BCE11695') {
+        localStorage.removeItem('vtop_student_data');
+        studentData = { ...defaultStudentData };
+      } else {
+        studentData = { ...defaultStudentData, ...parsed };
+      }
     }
   } catch (e) {
     console.error('Could not parse saved portal state', e);
@@ -58,11 +65,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Render photos
+    // Render photo vs CHOOSE PHOTO placeholder
     const mainImg = document.getElementById('main-student-img');
     const navImg = document.getElementById('nav-student-img');
-    if (mainImg) mainImg.src = studentData.photoUrl || 'student-photo.jpg';
-    if (navImg) navImg.src = studentData.photoUrl || 'student-photo.jpg';
+    const mainPlaceholder = document.getElementById('photo-placeholder');
+    const navPlaceholder = document.getElementById('nav-photo-placeholder');
+
+    if (studentData.photoUrl && studentData.photoUrl.trim() !== '') {
+      if (mainImg) {
+        mainImg.src = studentData.photoUrl;
+        mainImg.style.display = 'block';
+      }
+      if (navImg) {
+        navImg.src = studentData.photoUrl;
+        navImg.style.display = 'block';
+      }
+      if (mainPlaceholder) mainPlaceholder.style.display = 'none';
+      if (navPlaceholder) navPlaceholder.style.display = 'none';
+    } else {
+      if (mainImg) {
+        mainImg.src = '';
+        mainImg.style.display = 'none';
+      }
+      if (navImg) {
+        navImg.src = '';
+        navImg.style.display = 'none';
+      }
+      if (mainPlaceholder) mainPlaceholder.style.display = 'flex';
+      if (navPlaceholder) navPlaceholder.style.display = 'flex';
+    }
   }
 
   // Initial render
@@ -95,15 +126,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. Photo Upload & Synchronization
+  // 2. Photo Upload & CHOOSE PHOTO Handler
   const photoTrigger = document.getElementById('photo-trigger');
+  const navPhotoTrigger = document.getElementById('nav-photo-trigger');
   const photoUpload = document.getElementById('photo-upload');
 
-  if (photoTrigger && photoUpload) {
-    photoTrigger.addEventListener('click', () => {
+  function openFilePicker() {
+    if (photoUpload) {
       photoUpload.click();
-    });
+    }
+  }
 
+  if (photoTrigger) {
+    photoTrigger.addEventListener('click', openFilePicker);
+  }
+
+  if (navPhotoTrigger) {
+    navPhotoTrigger.addEventListener('click', openFilePicker);
+  }
+
+  if (photoUpload) {
     photoUpload.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
