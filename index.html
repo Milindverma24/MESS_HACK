@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIT Bhopal - Student Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar (Matching Screenshot 2 Header) -->
+  <header class="navbar">
+    <div class="nav-left">
+      <button class="menu-btn" aria-label="Toggle menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+      </button>
+      <div class="logo-group">
+        <span class="vit-logo">VIT</span>
+        <span class="campus-tag">(Bhopal Campus)</span>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <!-- Desktop Session Timer -->
+      <div class="session-timer desktop-only">
+        Session Time : <span id="timer-display">19m 49s</span>
+      </div>
+
+      <!-- Right Action Icons (Home, Print, Boxed Hamburger Menu) -->
+      <div class="nav-icons-group">
+        <a href="#" class="nav-icon" title="Home">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </a>
+        <a href="#" class="nav-icon" title="Print">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+        </a>
+        <button class="right-menu-box-btn" aria-label="Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Desktop Profile Badge -->
+      <div class="user-profile-nav desktop-only">
+        <img src="student-photo.jpg" alt="Student Thumbnail" class="nav-photo" id="nav-student-img">
+        <span class="user-id">
+          <span class="editable-field" data-bind="regNo" contenteditable="true" title="Click to edit Register Number">23BCE11695</span> (STUDENT)
+        </span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 10l5 5 5-5z"/>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- Left Sidebar (Desktop Only) -->
+  <aside class="sidebar desktop-only">
+    <div class="sidebar-icon-list">
+      <button class="side-btn" title="Dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+      </button>
+      <button class="side-btn" title="Documents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      </button>
+      <button class="side-btn" title="Information">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      </button>
+      <button class="side-btn" title="Structure">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3h7z"/></svg>
+      </button>
+      <button class="side-btn" title="Academics">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+      </button>
+      <button class="side-btn" title="University">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v2h18V5l-9-4zm-7 8v8h3V9H5zm5 0v8h3V9h-3zm5 0v8h3V9h-3zm5 0v8h3V9h-3zM2 19v2h20v-2H2z"/></svg>
+      </button>
+      <button class="side-btn" title="Navigation">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+      <button class="side-btn" title="Settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+      </button>
+      <button class="side-btn" title="Services">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 14h4v-4H4v4zm0 5h4v-4H4v4zm0-10h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"/></svg>
+      </button>
+      <button class="side-btn" title="Home Portal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      </button>
+      <button class="side-btn" title="Achievements">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V18H8v2h8v-2h-3v-2.1c2.25-.37 4-2.31 4-4.63V8c0-1.1-.9-2-2-2zm-12 3V7h2v3.8c-1.21-.39-2-1.46-2-2.8zM19 8c0 1.34-.79 2.41-2 2.8V7h2v1z"/></svg>
+      </button>
+      <button class="side-btn" title="Security">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content Container -->
+  <main class="main-wrapper">
+    <div class="profile-card">
+
+      <!-- Student Profile Header -->
+      <div class="profile-header">
+        <!-- Col 1: Photo & Name -->
+        <div class="profile-col photo-col">
+          <div class="photo-wrapper" id="photo-trigger" title="Click to upload new photo">
+            <img src="student-photo.jpg" alt="MILIND VERMA" class="student-img" id="main-student-img">
+            <div class="photo-overlay">Change Photo</div>
+          </div>
+          <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+          <div class="student-name editable-field" data-bind="name" contenteditable="true" title="Click to edit Name">MILIND VERMA</div>
+        </div>
+
+        <!-- Col 2: Info Fields -->
+        <div class="profile-col info-col">
+          <div class="info-group inline-group">
+            <span class="label">REGISTER NUMBER:</span>
+            <span class="value editable-field" data-bind="regNo" contenteditable="true" title="Click to edit Register Number">23BCE11695</span>
+          </div>
+
+          <div class="info-group block-group">
+            <span class="label block-label">VIT EMAIL:</span>
+            <div class="value editable-field block-value" data-bind="email" contenteditable="true" title="Click to edit Email">milind.23bce11695@vitbhopal.ac.in</div>
+          </div>
+
+          <div class="info-group block-group">
+            <span class="label block-label">PROGRAM &amp; BRANCH:</span>
+            <div class="value editable-field block-value" data-bind="program" contenteditable="true" title="Click to edit Program">BTECH - Computer Science and Engineering</div>
+          </div>
+
+          <div class="info-group block-group">
+            <span class="label block-label">SCHOOL NAME:</span>
+            <div class="value editable-field block-value" data-bind="school" contenteditable="true" title="Click to edit School">School of Computer Science and Engineering (SCOPE)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion Sections Container -->
+      <div class="accordion-container">
+
+        <!-- 1. PERSONAL INFORMATION -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="header-left">
+              <div class="header-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#000">
+                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1z"/>
+                </svg>
+              </div>
+              <h2 class="section-title">
+                <span>PERSONAL</span>
+                <span>INFORMATION</span>
+              </h2>
+            </div>
+            <div class="header-arrow">
+              <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#163f73" stroke-width="3">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="table-sliding-container">
+              <table class="info-table sliding-table">
+                <tbody>
+                  <tr>
+                    <td class="col-label">Student Full Name</td>
+                    <td class="col-value editable-field" data-bind="name" contenteditable="true">MILIND VERMA</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Application Number</td>
+                    <td class="col-value editable-field" data-bind="applicationNo" contenteditable="true">2023998035</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Register Number</td>
+                    <td class="col-value editable-field" data-bind="regNo" contenteditable="true">23BCE11695</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Gender</td>
+                    <td class="col-value editable-field" data-bind="gender" contenteditable="true">MALE</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Date of Birth</td>
+                    <td class="col-value editable-field" data-bind="dob" contenteditable="true">15-AUG-2005</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Blood Group</td>
+                    <td class="col-value editable-field" data-bind="bloodGroup" contenteditable="true">O+</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Nationality</td>
+                    <td class="col-value editable-field" data-bind="nationality" contenteditable="true">INDIAN</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. EDUCATIONAL INFORMATION -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="header-left">
+              <div class="header-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#000">
+                  <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                </svg>
+              </div>
+              <h2 class="section-title">
+                <span>EDUCATIONAL</span>
+                <span>INFORMATION</span>
+              </h2>
+            </div>
+            <div class="header-arrow">
+              <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#163f73" stroke-width="3">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="table-sliding-container">
+              <table class="info-table sliding-table">
+                <tbody>
+                  <tr>
+                    <td class="col-label">Program &amp; Branch</td>
+                    <td class="col-value editable-field" data-bind="program" contenteditable="true">BTECH - Computer Science and Engineering</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">School Name</td>
+                    <td class="col-value editable-field" data-bind="school" contenteditable="true">School of Computer Science and Engineering (SCOPE)</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">10th Board</td>
+                    <td class="col-value editable-field" data-bind="board10" contenteditable="true">CBSE</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">12th Board</td>
+                    <td class="col-value editable-field" data-bind="board12" contenteditable="true">CBSE</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Medium of Instruction</td>
+                    <td class="col-value editable-field" data-bind="medium" contenteditable="true">ENGLISH</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. FAMILY INFORMATION -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="header-left">
+              <div class="header-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#000">
+                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+              </div>
+              <h2 class="section-title">
+                <span>FAMILY</span>
+                <span>INFORMATION</span>
+              </h2>
+            </div>
+            <div class="header-arrow">
+              <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#163f73" stroke-width="3">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="table-sliding-container">
+              <table class="info-table sliding-table">
+                <tbody>
+                  <tr>
+                    <td class="col-label">Father's Name</td>
+                    <td class="col-value editable-field" data-bind="fatherName" contenteditable="true">RAJESH VERMA</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Mother's Name</td>
+                    <td class="col-value editable-field" data-bind="motherName" contenteditable="true">SUNITA VERMA</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. PROCTOR INFORMATION -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="header-left">
+              <div class="header-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#000">
+                  <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+              </div>
+              <h2 class="section-title">
+                <span>PROCTOR</span>
+                <span>INFORMATION</span>
+              </h2>
+            </div>
+            <div class="header-arrow">
+              <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#163f73" stroke-width="3">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="table-sliding-container">
+              <table class="info-table sliding-table">
+                <tbody>
+                  <tr>
+                    <td class="col-label">Proctor Name</td>
+                    <td class="col-value editable-field" data-bind="proctorName" contenteditable="true">DR. ANIL KUMAR</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Department</td>
+                    <td class="col-value editable-field" data-bind="proctorDept" contenteditable="true">SCOPE</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. HOSTEL INFORMATION (EXPANDED INITIALLY) -->
+        <div class="accordion-item active">
+          <div class="accordion-header">
+            <div class="header-left">
+              <div class="header-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#000">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+              </div>
+              <h2 class="section-title">
+                <span>HOSTEL</span>
+                <span>INFORMATION</span>
+              </h2>
+            </div>
+            <div class="header-arrow">
+              <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#163f73" stroke-width="3">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="accordion-content" style="display: block;">
+            <!-- Sliding Table Box (Matching Screenshot 1) -->
+            <div class="table-sliding-container">
+              <table class="info-table sliding-table hostel-table">
+                <tbody>
+                  <tr>
+                    <td class="col-label">Application Number</td>
+                    <td class="col-value editable-field" data-bind="applicationNo" contenteditable="true" title="Click to edit Application Number">2023998035</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Register Number</td>
+                    <td class="col-value editable-field" data-bind="regNo" contenteditable="true" title="Click to edit Register Number">23BCE11695</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Block Name</td>
+                    <td class="col-value editable-field" data-bind="blockName" contenteditable="true" title="Click to edit Block Name">MENS HOSTEL BLOCK-2 (BOYS HOSTEL - Block )</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Room No.</td>
+                    <td class="col-value editable-field" data-bind="roomNo" contenteditable="true" title="Click to edit Room Number">A007</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Bed Type</td>
+                    <td class="col-value editable-field" data-bind="bedType" contenteditable="true" title="Click to edit Bed Type">3- BED -NACPF</td>
+                  </tr>
+                  <tr>
+                    <td class="col-label">Mess Information</td>
+                    <td class="col-value editable-field" data-bind="messInfo" contenteditable="true" title="Click to edit Mess Information">JAIN - M/S JMB CATERERS</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /accordion-container -->
+
+    </div> <!-- /profile-card -->
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
